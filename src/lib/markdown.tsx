@@ -55,7 +55,7 @@ export function Markdown({ text }: { text: string }) {
 
   const flushTable = () => {
     if (!table.length) return;
-    const [head, ...rows] = table;
+    const [head = [], ...rows] = table;
     blocks.push(
       <div key={`t${blocks.length}`} className="overflow-x-auto rounded-xl border border-border">
         <table className="w-full text-sm">
@@ -105,7 +105,7 @@ export function Markdown({ text }: { text: string }) {
     const heading = /^(#{1,4})\s+(.*)$/.exec(trimmed);
     if (heading) {
       flushList();
-      const level = heading[1].length;
+      const level = (heading[1] ?? "#").length;
       blocks.push(
         <p
           key={`h${index}`}
@@ -115,7 +115,7 @@ export function Markdown({ text }: { text: string }) {
               : "text-sm font-semibold uppercase tracking-wide text-muted-foreground"
           }
         >
-          {inline(heading[2], `h${index}`)}
+          {inline(heading[2] ?? "", `h${index}`)}
         </p>,
       );
       return;
@@ -124,14 +124,14 @@ export function Markdown({ text }: { text: string }) {
     if (bullet) {
       if (ordered) flushList();
       ordered = false;
-      list.push(bullet[1]);
+      list.push(bullet[1] ?? "");
       return;
     }
     const num = /^\d+[.)]\s+(.*)$/.exec(trimmed);
     if (num) {
       if (!ordered) flushList();
       ordered = true;
-      list.push(num[1]);
+      list.push(num[1] ?? "");
       return;
     }
     flushList();
