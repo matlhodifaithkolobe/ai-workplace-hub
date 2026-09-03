@@ -171,8 +171,8 @@ function ChatPage() {
               }
             }}
             rows={1}
-            placeholder="Ask WorkAI anything about your work…"
-            className="max-h-32 min-h-[44px] w-full resize-y rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring/40"
+            placeholder="Ask WorkAI anything…"
+            className="max-h-32 min-h-[48px] w-full resize-y rounded-2xl border border-border bg-background px-4 py-3 text-sm leading-6 outline-none focus:ring-2 focus:ring-ring/40"
           />
           <button
             type="submit"
